@@ -3,15 +3,11 @@
 En el siguiente ejercicio aprenderemos a:
 
 - Clonar una tabla y un esquema.
-- Volver al estado anterior de una tabla gracias al *time travel* de Snowflake.
+- Volver al estado anterior de una tabla gracias al *Time Travel* de Snowflake.
 
 En esta práctica seguiremos utilizando los datos que ingestamos en el apartado de Ejercicio 1- Cargando Datos.
 
-**Partes de la práctica:**
-
----
-
-# 1. Clonados
+# 1. Cloning
 
 ## a) Clonado de tabla
 
@@ -20,7 +16,7 @@ Por ejemplo, si queremos clonar la tabla *Addresses*  del esquema *BRONZE* en un
 ```sql
 USE DATABASE DEV_CURSO_BRZ_DB_ALUMNO_<TU NUMERO>;
 USE SCHEMA BRONZE;
-CREATE OR REPLACE TABLE Addresses_clonado CLONE Addresses; 
+CREATE OR REPLACE TABLE ADDRESSES_CLONADO CLONE ADDRESSES; 
 ```
 
 Al hacer el clonado podemos observar que ambas tablas son idénticas:
@@ -29,10 +25,10 @@ Al hacer el clonado podemos observar que ambas tablas son idénticas:
 
 ## b) Clonado de esquema
 
-De la misma forma, podemos clonar un esquema. Por ejemplo, podemos clonar el esquema *Production.*
+De la misma forma, podemos clonar un esquema. Por ejemplo, podemos clonar el esquema *BRONZE*
 
 ```sql
-CREATE OR REPLACE SCHEMA bronze_clonado CLONE BRONZE;
+CREATE OR REPLACE SCHEMA BRONZE_CLONADO CLONE BRONZE;
 ```
 
 Usando este comando podemos observar que el esquema nuevo tiene la misma estructura que el original:
@@ -43,9 +39,9 @@ Usando este comando podemos observar que el esquema nuevo tiene la misma estruct
 
 ## a) Time travel por tiempo
 
-El Time Travel en Snowflake es una poderosa funcionalidad que permite a los usuarios acceder a datos históricos dentro de un marco de tiempo específico, lo cual es extremadamente útil para una variedad de casos de uso en el análisis de datos y la gestión de bases de datos. Aquí enseñaremos brevemente cómo podemos esta funcionalidad.
+El Time Travel en Snowflake es una poderosa funcionalidad que permite a los usuarios acceder a datos históricos dentro de un marco de tiempo específico, lo cual es extremadamente útil para una variedad de casos de uso en el análisis de datos y la gestión de bases de datos. Aquí enseñaremos brevemente cómo podemos usar esta funcionalidad.
 
-Utilizaremos el schema de “Production” y la tabla de “Brands” para hacer las pruebas:
+  Seguiremos usando el schema de “BRONZE” y la tabla de “Addresses” para hacer las pruebas:
 
 ```sql
 use schema production;
