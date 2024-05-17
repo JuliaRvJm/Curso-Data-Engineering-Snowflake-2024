@@ -89,8 +89,6 @@ SELECT ¨* FROM addreses_clonado;
 
 Ahora, utilizamos el id de la query para volver al estado anterior a esta consulta:
 
-![imagen (3)](https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/166698078/6553433e-1425-4026-a7bb-4f1260be9534)
-
 ![331463687-6553433e-1425-4026-a7bb-4f1260be9534](https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/150705587/a659efbb-8ac8-4123-abd9-e08bc7405454)
 
 
