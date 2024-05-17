@@ -97,10 +97,6 @@ TRUNCATE TABLE addresses_clonado;
 SELECT ¨* FROM addreses_clonado;
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7e0dcde1-5a03-4ce7-a56f-1497c72c368f/e60c8841-dfed-40da-8ea0-23d7d33c314a/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7e0dcde1-5a03-4ce7-a56f-1497c72c368f/f7e9a189-20a8-4cb7-bcb3-0525fde1fcaa/Untitled.png)
-
 Ahora, utilizamos el id de la query para volver al estado anterior a esta consulta:
 
 ```sql
@@ -108,6 +104,4 @@ CREATE OR REPLACE TABLE addresses_clonado AS SELECT * FROM addresses_clonado BEF
 SELECT ¨* FROM addreses_clonado;
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7e0dcde1-5a03-4ce7-a56f-1497c72c368f/74a43f95-f830-47b4-b48b-72a8ac822c9d/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7e0dcde1-5a03-4ce7-a56f-1497c72c368f/284e3927-fe18-4f39-b531-5b7f55b694c3/Untitled.png)
+<img width="687" alt="Sin título" src="https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/166698078/ba6c9d28-f138-4476-b62a-11391475cb98">
