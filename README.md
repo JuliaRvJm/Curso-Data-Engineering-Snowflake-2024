@@ -11,12 +11,12 @@ En esta práctica seguiremos utilizando los datos que ingestamos en el apartado 
 
 ## a) Clonado de tabla
 
-Por ejemplo, si queremos clonar la tabla *Addresses*  del esquema *BRONZE* en una tabla con nombre, pongamos, *Addresses_clonado*, debemos ejecutar el siguiente comando:
+Por ejemplo, si queremos clonar la tabla *addresses*  del esquema *bronze* en una tabla con nombre, pongamos, *addresses_clonado*, debemos ejecutar el siguiente comando:
 
 ```sql
-USE DATABASE DEV_CURSO_BRZ_DB_ALUMNO_<TU NUMERO>;
-USE SCHEMA BRONZE;
-CREATE OR REPLACE TABLE ADDRESSES_CLONADO CLONE ADDRESSES; 
+USE DATABASE dev_curso_brz_db_alumno_<tu numero>;
+USE SCHEMA bronze;
+CREATE OR REPLACE TABLE addresses_clonado CLONE addresses;
 ```
 
 Al hacer el clonado podemos observar que ambas tablas son idénticas:
@@ -28,7 +28,7 @@ Al hacer el clonado podemos observar que ambas tablas son idénticas:
 De la misma forma, podemos clonar un esquema. Por ejemplo, podemos clonar el esquema *BRONZE*
 
 ```sql
-CREATE OR REPLACE SCHEMA BRONZE_CLONADO CLONE BRONZE;
+CREATE OR REPLACE SCHEMA bronze_clonado CLONE bronze;
 ```
 
 Usando este comando podemos observar que el esquema nuevo tiene la misma estructura que el original:
@@ -41,39 +41,38 @@ Usando este comando podemos observar que el esquema nuevo tiene la misma estruct
 
 El Time Travel en Snowflake es una poderosa funcionalidad que permite a los usuarios acceder a datos históricos dentro de un marco de tiempo específico, lo cual es extremadamente útil para una variedad de casos de uso en el análisis de datos y la gestión de bases de datos. Aquí enseñaremos brevemente cómo podemos usar esta funcionalidad.
 
-  Seguiremos usando el schema de “BRONZE” y la tabla de “Addresses” para hacer las pruebas:
+Seguiremos usando el schema de “bronze” y la tabla de “addresses” para hacer las pruebas.
+
+Vamos a insertar un nuevo registro en la tabla *addresses* y visualizamos la tabla:
 
 ```sql
-use schema production;
--- Vemos los datos de nuestra tabla
-select * from brands;
--- Insertamos valores en la tabla
-insert into brands values(10,'Marca',null, CURRENT_TIMESTAMP());
--- Vemos los datos de nuestra tabla
-select * from brands;
+USE SCHEMA bronze;
+INSERT INTO addresses VALUES(10,'Marca',null, CURRENT_TIMESTAMP());
+SELECT * FROM addresses;
 ```
 
-Ahora, borraremos el valor que le acabamos de insertar y observaremos mediante Time travel cómo podemos ver la versión inicial de la tabla:
+Ahora, borraremos el valor que le acabamos de insertar y mediante el uso de Time travel recuperaremos la versión inicial de la tabla con el registro insertado:
 
 ```sql
--- Borramos el valor nuevo añadido
-delete from brands where brand_id=10;
--- Vemos los datos de nuestra tabla
-select * from brands;
--- Observamos cómo era la tabla hace 2 minutos:
-select * from brands at (offset => -60*2);
+DELETE FROM addresses WHERE addresses_id=10;
+SELECT * FROM addresses;
+```
+Observamos cómo era la tabla hace 2 minutos:
+
+```sql
+SELECT * FROM addresses AT (OFFSET => -60*2);
+
 -- También se puede hacer de esta forma, la cual le resta dos minutos al tiempo actual:
-select * from brands at (TIMESTAMP => TIMESTAMPADD(minute, -2, CURRENT_TIMESTAMP()));
+SELECT * FROM addresses AT (TIMESTAMP => TIMESTAMPADD(MINUTE, -2, CURRENT_TIMESTAMP()));
 ```
 
-Utilizando el time travel podemos ver cómo era la tabla hace dos minutos, en la cual no habíamos borrado el registro cuyo brand_id era el 10. Esta versión antigua se puede guardar con el siguiente comando:
+Esta versión "antigua" se puede guardar con el siguiente comando:
 
 ```sql
--- Para guardar esta versión en otra tabla
-create or replace table brands_clone CLONE brands at (TIMESTAMP => TIMESTAMPADD(minute, -2, CURRENT_TIMESTAMP()));
+CREATE OR REPLACE TABLE addresses_clone CLONE addresses at (TIMESTAMP => TIMESTAMPADD(minute, -5, CURRENT_TIMESTAMP()));
 ```
 
-*Nota: es posible que hayan pasado los dos minutos y la tabla vuelva a estar como está en la actualidad. Podemos volver a la versión anterior añadiendo más minutos a la función de TIMESTAMPADD(minute, -2, CURRENT_TIMESTAMP()) por ejemplo, si queremos que vuelva a la de hace 5 minutos, la función será TIMESTAMPADD(minute, -5, CURRENT_TIMESTAMP()).*
+*Nota: es posible que hayan pasado los dos minutos y la tabla vuelva a estar como está en la actualidad. Podemos volver a la versión anterior añadiendo más minutos a la función de TIMESTAMPADD(minute, -5, CURRENT_TIMESTAMP()) por ejemplo, si queremos que vuelva a la de hace 10 minutos, la función será TIMESTAMPADD(minute, -10, CURRENT_TIMESTAMP()).*
 
 Siguiendo con el ejercicio, podemos borrar la tabla y recuperarla también con el time travel de Snowflake:
 
