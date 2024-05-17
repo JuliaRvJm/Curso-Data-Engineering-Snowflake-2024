@@ -99,9 +99,9 @@ SELECT ¨* FROM addreses_clonado;
 
 Ahora, utilizamos el id de la query para volver al estado anterior a esta consulta:
 
+![imagen (3)](https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/166698078/6553433e-1425-4026-a7bb-4f1260be9534)
+
 ```sql
 CREATE OR REPLACE TABLE addresses_clonado AS SELECT * FROM addresses_clonado BEFORE (STATEMENT => '01b38ced-0103-a99d-0000-185509e4503e');
 SELECT ¨* FROM addreses_clonado;
 ```
-
-<img width="687" alt="Sin título" src="https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/166698078/ba6c9d28-f138-4476-b62a-11391475cb98">
