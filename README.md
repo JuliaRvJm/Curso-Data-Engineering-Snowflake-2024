@@ -102,6 +102,8 @@ Ahora, utilizamos el id de la query para volver al estado anterior a esta consul
 ![imagen (3)](https://github.com/JuliaRvJm/Curso-Data-Engineering-Snowflake-2024/assets/166698078/6553433e-1425-4026-a7bb-4f1260be9534)
 
 ```sqle
-CREATE OR REPLACE TABLE addresses_clonado AS SELECT * FROM addresses_clonado BEFORE (STATEMENT => '01b458e8-0103-a99d-0000-185509e4503e');
-SELECT ¨* FROM addresses_clonado;
+CREATE OR REPLACE TABLE addresses_restaurado AS SELECT * FROM addresses_clonado BEFORE (STATEMENT => '01b458e8-0103-a99d-0000-185509e4503e');
+SELECT ¨* FROM addresses_restaurado;
 ```
+
+Usamos el id de la consulta para crear una nueva tabla *addresses_restaurado* que contenga los datos tal como estaban antes de truncar addresses_clonado.
