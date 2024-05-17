@@ -103,5 +103,5 @@ Ahora, utilizamos el id de la query para volver al estado anterior a esta consul
 
 ```sql
 CREATE OR REPLACE TABLE addresses_clonado AS SELECT * FROM addresses_clonado BEFORE (STATEMENT => '01b38ced-0103-a99d-0000-185509e4503e');
-SELECT ¨* FROM addreses_clonado;
+SELECT ¨* FROM addresses_clonado;
 ```
