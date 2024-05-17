@@ -37,7 +37,7 @@ Vamos a insertar un nuevo registro en la tabla *addresses* y visualizamos la tab
 
 ```sql
 USE SCHEMA bronze;
-INSERT INTO addresses VALUES(10,'Marca',null, CURRENT_TIMESTAMP());
+INSERT INTO addresses VALUES(10, '75074',	'United States 100 Sauthoff Trail',	'Texas');
 SELECT * FROM addresses;
 ```
 
@@ -59,7 +59,7 @@ SELECT * FROM addresses AT (TIMESTAMP => TIMESTAMPADD(MINUTE, -2, CURRENT_TIMEST
 Esta versión "antigua" se puede guardar con el siguiente comando:
 
 ```sql
-CREATE OR REPLACE TABLE addresses_clone CLONE addresses at (TIMESTAMP => TIMESTAMPADD(minute, -5, CURRENT_TIMESTAMP()));
+CREATE OR REPLACE TABLE addresses_clone CLONE addresses at (TIMESTAMP => TIMESTAMPADD(MINUTO, -5, CURRENT_TIMESTAMP()));
 ```
 
 *Nota: es posible que hayan pasado los dos minutos y la tabla vuelva a estar como está en la actualidad. Podemos volver a la versión anterior añadiendo más minutos a la función de TIMESTAMPADD(minute, -5, CURRENT_TIMESTAMP()) por ejemplo, si queremos que vuelva a la de hace 10 minutos, la función será TIMESTAMPADD(minute, -10, CURRENT_TIMESTAMP()).*
@@ -96,7 +96,7 @@ CREATE OR REPLACE TABLE addresses_restaurado AS (
   SELECT * FROM addresses_clonado BEFORE (STATEMENT => '01b458e8-0103-a99d-0000-185509e4503e')
 );
 
-SELECT ¨* FROM addresses_restaurado;
+SELECT * FROM addresses_restaurado;
 ```
 
 Usamos el id de la consulta para crear una nueva tabla *addresses_restaurado* que contenga los datos tal como estaban antes de truncar addresses_clonado.
